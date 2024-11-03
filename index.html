@@ -62,7 +62,23 @@ sphereMesh.castShadow = true;
 sphereMesh.receiveShadow = true;
 scene.add( sphereMesh );
 
+//creating the deck class
+class Deck{
+    constructor(card){
+        this.card = card;
+    }
 
+    
+}
+
+//creating the card class
+class Card{
+    constructor(texture, value, suit){
+        this.texture = texture;
+        this.value = value;
+        this.suit = suit;
+    }
+}
 
 // Add lights
 var lights = [];
