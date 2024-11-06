@@ -55,13 +55,6 @@ var planeMesh = new THREE.Mesh(plane, planeMat);
 planeMesh.receiveShadow = true;
 scene.add( planeMesh );
 
-var sphere = new THREE.SphereGeometry(2,32,32);
-sphere.translate( 1, 3, 0 );
-var sphereMat = new THREE.MeshPhongMaterial( {color: 'red'} );
-var sphereMesh = new THREE.Mesh( sphere, sphereMat );
-sphereMesh.castShadow = true;
-sphereMesh.receiveShadow = true;
-scene.add( sphereMesh );
 
 //creating the deck class
 class Deck{
@@ -96,6 +89,8 @@ class Card{
         this.material = new THREE.MeshPhongMaterial({ map: texture });
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.castShadow = true;
+
+        this.mesh.position.set(position.x, position.y, position.z);
     }
 
     getSuit(){
