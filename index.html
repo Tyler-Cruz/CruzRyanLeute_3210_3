@@ -176,6 +176,9 @@ function keyHandler(e) {
     case 68: //d jey point light right
       lights[2].position.x -= lightMoveSpeed;
       break;
+    case 77: // M key for toggling shadows
+      renderer.shadowMap.enabled = !renderer.shadowMap.enabled;
+      break;
   }
 }
 
