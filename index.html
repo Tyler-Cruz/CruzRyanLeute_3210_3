@@ -105,19 +105,18 @@ class Card{
 
 // Add lights
 var lights = [];
-lights[0] = new THREE.DirectionalLight(  );
+lights[0] = new THREE.DirectionalLight(0xFFFFFF, 0.5 );
 lights[0].position.set(10,10,0);
 lights[0].target.position.set(0,0,0);
 lights[0].castShadow = true;
 lights[0].shadow.mapSize.width = 1024; // try removing these and see what happens
 lights[0].shadow.mapSize.height = 1024;
 scene.add( lights[ 0 ] );
-lights[0].intensity = 0.5;
 
-lights[1] = new THREE.AmbientLight({color: 0x999999}, 0.5);
+lights[1] = new THREE.AmbientLight(0xFF0000, 0.5);
 scene.add(lights[1]);
 
-lights[2] = new THREE.PointLight();
+lights[2] = new THREE.PointLight(0xFFFFFF, 0.5);
 lights[2].position.set( -5, 10, 0 );
 lights[2].castShadow = true;
 lights[2].intensity = 15;
