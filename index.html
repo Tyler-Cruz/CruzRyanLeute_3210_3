@@ -47,7 +47,7 @@ renderer.shadowMap.enabled = true;
 const controls = new OrbitControls( camera.cam, renderer.domElement );
 
 // Add the geometry
-var plane = new THREE.PlaneGeometry(10, 10);
+var plane = new THREE.PlaneGeometry(20, 20);
 plane.rotateX(-1);
 var tableTexture = new THREE.TextureLoader().load('wood.jpg');
 var planeMat = new THREE.MeshPhongMaterial({ map: tableTexture });
@@ -77,9 +77,13 @@ class Deck{
     
 }
 
+function initializeDeck() {
+    //load decks
+}
+
 //creating the card class
 class Card{
-    constructor(texture, value, suit){
+    constructor(texture, value, suit, position){
         this.texture = texture;
         this.value = value;
         this.suit = suit;
@@ -89,7 +93,6 @@ class Card{
         this.material = new THREE.MeshPhongMaterial({ map: texture });
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.castShadow = true;
-
         this.mesh.position.set(position.x, position.y, position.z);
     }
 
@@ -178,15 +181,25 @@ function keyHandler(e) {
 }
 
 function nextTurn() {
-    // Logic to draw cards from each deck and animate them to the center
-    const card1 = deck1.drawCard();
-    const card2 = deck2.drawCard();
-    const card3 = deck3.drawCard();
-    
-    if (card1 && card2 && card3) {
+  if (deck1.cards.length > 0 && deck2.cards.length > 0) {
+        const card1 = deck1.drawCard();
+        const card2 = deck2.drawCard();
+        
+        // Move the cards to the center
         animateCardToCenter(card1.mesh, new THREE.Vector3(0, 0, 0));
         animateCardToCenter(card2.mesh, new THREE.Vector3(1, 0, 0));
-        animateCardToCenter(card3.mesh, new THREE.Vector3(-1, 0, 0));
+        
+        // Compare the cards
+        if (card1.value === card2.value) {
+            console.log('Tie! A battle occurs.');
+        } else {
+            let winner = card1.value > card2.value ? 'Player 1' : 'Player 2';
+            console.log(winner + ' wins this round!');
+            // update decks
+        }}
+    else {
+        // game ends
+        console.log("Game Over! One player has all the cards.");
     }
 }
 
