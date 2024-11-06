@@ -184,23 +184,60 @@ function nextTurn() {
   if (deck1.cards.length > 0 && deck2.cards.length > 0) {
         const card1 = deck1.drawCard();
         const card2 = deck2.drawCard();
-        
+        const card3 = deck3.drawCard();
+
         // Move the cards to the center
-        animateCardToCenter(card1.mesh, new THREE.Vector3(0, 0, 0));
-        animateCardToCenter(card2.mesh, new THREE.Vector3(1, 0, 0));
+        animateCardToCenter(card1.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(card2.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(card3.mesh, new THREE.Vector3(1, 0, 0));
         
         // Compare the cards
-        if (card1.value === card2.value) {
-            console.log('Tie! A battle occurs.');
+         // Compare the cards
+    if (card1.value === card2.value && card2.value === card3.value) {
+      console.log('Tie! A battle occurs among all players.');
+      // Implement battle logic for three-way tie if desired
+    } else {
+      // Determine the highest card and the winner
+      const highestValue = Math.max(card1.value, card2.value, card3.value);
+      let winnerDeck;
+
+      if (card1.value === highestValue && card2.value === highestValue) {
+        console.log('Tie between Player 1 and Player 2! Battle required.');
+        // Handle tie between two decks
+      } else if (card2.value === highestValue && card3.value === highestValue) {
+        console.log('Tie between Player 2 and Player 3! Battle required.');
+        // Handle tie between two decks
+      } else if (card1.value === highestValue && card3.value === highestValue) {
+        console.log('Tie between Player 1 and Player 3! Battle required.');
+        // Handle tie between two decks
+      } else {
+        // One player has the highest card, determine winner
+        if (card1.value === highestValue) {
+          winnerDeck = deck1;
+          console.log('Player 1 wins this round!');
+        } else if (card2.value === highestValue) {
+          winnerDeck = deck2;
+          console.log('Player 2 wins this round!');
         } else {
-            let winner = card1.value > card2.value ? 'Player 1' : 'Player 2';
-            console.log(winner + ' wins this round!');
-            // update decks
-        }}
-    else {
-        // game ends
-        console.log("Game Over! One player has all the cards.");
+          winnerDeck = deck3;
+          console.log('Player 3 wins this round!');
+        }
+
+        // Transfer all three cards to the winner's deck
+        if (winnerDeck) {
+          winnerDeck.cards.push(card1, card2, card3);
+
+          // Optionally animate the cards back to the winner's deck
+          animateCardToDeck(card1.mesh, winnerDeck);
+          animateCardToDeck(card2.mesh, winnerDeck);
+          animateCardToDeck(card3.mesh, winnerDeck);
+        }
+      }
     }
+  } else {
+    // Game ends if any player has no cards left
+    console.log("Game Over! One player has all the cards.");
+  }
 }
 
 
