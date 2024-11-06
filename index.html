@@ -65,13 +65,22 @@ scene.add( sphereMesh );
 
 //creating the deck class
 class Deck{
-    constructor(card){
-        this.card = card;
+    constructor(){
+      this.cards = [];
     }
 
-    getCard(){
-      return this.card;
+    addCard(card) {
+      this.cards.push(card);
     }
+
+    shuffle(){
+      this.cards.sort(() => Math.random() - 0.5);
+    }
+
+    drawCard(){
+      return this.cards.pop();
+    }
+
     
 }
 
@@ -81,6 +90,12 @@ class Card{
         this.texture = texture;
         this.value = value;
         this.suit = suit;
+
+        //card geometry
+        this.geometry = new THREE.BoxGeometry(0.1, 2.5, 3.5);  // Thin rectangle
+        this.material = new THREE.MeshPhongMaterial({ map: texture });
+        this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.mesh.castShadow = true;
     }
 
     getSuit(){
