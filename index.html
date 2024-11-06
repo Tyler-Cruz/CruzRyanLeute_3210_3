@@ -150,27 +150,32 @@ function toggleOtherRotation() {
   camera.animateOtherRotation = !camera.animateOtherRotation;
 }
 
+const lightMoveSpeed = 0.5;
+
 // Simple way to setup keybaord controls:
 function keyHandler(e) {
   switch(e.keyCode){
     case 78: //key N
       nextTurn();
       break;
-    case 84: // The 'T' key
-      toggleRotation();
-    break;
-    case 82: // The 'R' key
-      toggleOtherRotation();
-    break;
-    case 65: // The 'A' key
-      lights[0].visible = !lights[0].visible;
-    break;
-    case 68: // The 'D' key
+    case 76: //L key toggling ambient light
       lights[1].visible = !lights[1].visible;
-    break;
-    case 80: // The 'P' key
+      break;
+    case 80: //p key for toggling point light
       lights[2].visible = !lights[2].visible;
-    break;
+      break;
+    case 87: //w key for moving point light forward
+      lights[2].position.z += lightMoveSpeed;
+      break;
+    case 83: // s key for point light backward
+      lights[2].position.z -= lightMoveSpeed;
+      break;
+    case 65: //a key point light left
+      lights[2].position.x += lightMoveSpeed;
+      break;
+    case 68: //d jey point light right
+      lights[2].position.x -= lightMoveSpeed;
+      break;
   }
 }
 
