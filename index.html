@@ -153,6 +153,9 @@ function toggleOtherRotation() {
 // Simple way to setup keybaord controls:
 function keyHandler(e) {
   switch(e.keyCode){
+    case 78: //key N
+      nextTurn();
+      break;
     case 84: // The 'T' key
       toggleRotation();
     break;
@@ -170,6 +173,21 @@ function keyHandler(e) {
     break;
   }
 }
+
+function nextTurn() {
+    // Logic to draw cards from each deck and animate them to the center
+    const card1 = deck1.drawCard();
+    const card2 = deck2.drawCard();
+    const card3 = deck3.drawCard();
+    
+    if (card1 && card2 && card3) {
+        animateCardToCenter(card1.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(card2.mesh, new THREE.Vector3(1, 0, 0));
+        animateCardToCenter(card3.mesh, new THREE.Vector3(-1, 0, 0));
+    }
+}
+
+
 document.addEventListener( "keydown", keyHandler, false );
     </script>
 </body>
