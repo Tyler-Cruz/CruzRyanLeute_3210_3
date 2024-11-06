@@ -49,8 +49,9 @@ const controls = new OrbitControls( camera.cam, renderer.domElement );
 // Add the geometry
 var plane = new THREE.PlaneGeometry(10, 10);
 plane.rotateX(-1);
-var planeMat = new THREE.MeshPhongMaterial( {color: 'green'} );
-var planeMesh = new THREE.Mesh( plane, planeMat );
+var tableTexture = new THREE.TextureLoader().load('wood.jpg');
+var planeMat = new THREE.MeshPhongMaterial({ map: tableTexture });
+var planeMesh = new THREE.Mesh(plane, planeMat);
 planeMesh.receiveShadow = true;
 scene.add( planeMesh );
 
@@ -72,7 +73,6 @@ class Deck{
       return this.card;
     }
     
-    //everyone starts with 17 cards and acts like a queue (FIFO)
 }
 
 //creating the card class
@@ -90,38 +90,9 @@ class Card{
     getValue(){
       return this.value;
     }
-
-    //set card textures through running through the texture folder and reading name since they all share similar format
-    //back of cards can just be a solid color from rectangle solid
-}
-
-//adding table 
-// const loader = new OBJLoader();
-// loader.load('table.obj');
-// function (object){
-//   scene.add(object);
-// }
-
-//determines how the rules work
-function rules(){
-
-  //all players start with 17 cards
-
-  //checks all the cards values suit does not matter
-
-  //whoever has the highest card wins the cards
-
-  //if two cards are same highest value cause one more card to be thrown face down and another to be played
-  //repeat checking the cards and winner
-
-  //repeat until only one player has cards
 }
 
 // Add lights
-
-//Shadows need a toggle to be triggered with M key
-
-//directional light needs to move with WASD
 var lights = [];
 lights[0] = new THREE.DirectionalLight(  );
 lights[0].position.set(10,10,0);
@@ -132,11 +103,9 @@ lights[0].shadow.mapSize.height = 1024;
 scene.add( lights[ 0 ] );
 lights[0].intensity = 0.5;
 
-//something like this has to stay and be toggleable with L key
 lights[1] = new THREE.AmbientLight({color: 0x999999}, 0.5);
 scene.add(lights[1]);
 
-//needs to be togglable with P key
 lights[2] = new THREE.PointLight();
 lights[2].position.set( -5, 10, 0 );
 lights[2].castShadow = true;
@@ -146,7 +115,6 @@ scene.add( lights[2] );
 // Use this for not-necessarily-static scenes or scenes you want to animate
 function animate() {
   // If we're rotating the camera change that here.
-  //CAMERA DOES NOT NEED TO MOVE
   if( camera.animateRotation ) 
     // The applyAxisAngle method rotates about an axis in space
     camera.cam.position.applyAxisAngle( new THREE.Vector3(0.0, 1.0, 0.0 ), camera.turnSpeed * 0.1 );
@@ -185,9 +153,6 @@ function keyHandler(e) {
     case 80: // The 'P' key
       lights[2].visible = !lights[2].visible;
     break;
-    //case 78: //N key
-
-    //break;
   }
 }
 document.addEventListener( "keydown", keyHandler, false );
