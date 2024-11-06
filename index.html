@@ -7,7 +7,6 @@
 
     <script type="module">
 import * as THREE from "three";
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 class MyCamera {
   constructor(xLA, yLA, zLA) {
@@ -44,10 +43,9 @@ renderer.setPixelRatio(document.getElementById('myCanvas').devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 // renderer.physicallyCorrectLights = true;
-const controls = new OrbitControls( camera.cam, renderer.domElement );
 
 // Add the geometry
-var plane = new THREE.PlaneGeometry(20, 20);
+var plane = new THREE.PlaneGeometry(10, 10);
 plane.rotateX(-1);
 var tableTexture = new THREE.TextureLoader().load('wood.jpg');
 var planeMat = new THREE.MeshPhongMaterial({ map: tableTexture });
