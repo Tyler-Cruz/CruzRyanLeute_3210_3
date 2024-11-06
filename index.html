@@ -91,6 +91,12 @@ class Card{
     }
 }
 
+//adding table 
+const loader = new OBJLoader();
+loader.load();
+
+
+
 // Add lights
 var lights = [];
 lights[0] = new THREE.DirectionalLight(  );
@@ -152,6 +158,9 @@ function keyHandler(e) {
     case 80: // The 'P' key
       lights[2].visible = !lights[2].visible;
     break;
+    //case 78: //N key
+
+    //break;
   }
 }
 document.addEventListener( "keydown", keyHandler, false );
