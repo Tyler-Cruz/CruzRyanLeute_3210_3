@@ -216,35 +216,91 @@ function nextTurn() {
 
       if (card1.value === highestValue && card2.value === highestValue) {
         console.log('Tie between Player 1 and Player 2! Battle required.');
-        // Handle tie between two decks
+        
+        // each player draws three cards, face down
+        const war1 = deck1.drawCard();
+        const war2 = deck1.drawCard();
+        const war3 = deck1.drawCard();
+
+        const war4 = deck2.drawCard();
+        const war5 = deck2.drawCard();
+        const war6 = deck2.drawCard();
+
+        // each player draws one card face up to compare
+        const p1Card = deck1.drawCard();
+        const p2Card = deck2.drawCard();
+
+        if (p1Card > p2Card) {
+          winnerDeck = deck1;
+          winnerDeck.cards.push(war1, war2, war3, war4, war5, war6, p1Card, p2Card);
+        } else {
+          winnerDeck = deck2;
+          winnerDeck.cards.push(war1, war2, war3, war4, war5, war6, p1Card, p2Card);
+        }
+
+
       } else if (card2.value === highestValue && card3.value === highestValue) {
-        console.log('Tie between Player 2 and Player 3! Battle required.');
-        // Handle tie between two decks
+          console.log('Tie between Player 2 and Player 3! Battle required.');
+          const war1 = deck1.drawCard();
+          const war2 = deck1.drawCard();
+          const war3 = deck1.drawCard();
+
+          const war4 = deck2.drawCard();
+          const war5 = deck2.drawCard();
+          const war6 = deck2.drawCard();
+
+          // each player draws one card face up to compare
+          const p2Card = deck2.drawCard();
+          const p3Card = deck3.drawCard();
+
+          if (p2Card > p3Card) {
+            winnerDeck = deck1;
+            winnerDeck.cards.push(card1, card2, card3, war1, war2, war3, war4, war5, war6, p2Card, p3Card);
+         } else {
+            winnerDeck = deck2;
+            winnerDeck.cards.push(card1, card2, card3, war1, war2, war3, war4, war5, war6, p2Card, p3Card);
+            }
+     
       } else if (card1.value === highestValue && card3.value === highestValue) {
         console.log('Tie between Player 1 and Player 3! Battle required.');
-        // Handle tie between two decks
+        const war1 = deck1.drawCard();
+        const war2 = deck1.drawCard();
+        const war3 = deck1.drawCard();
+
+        const war4 = deck3.drawCard();
+        const war5 = deck3.drawCard();
+        const war6 = deck3.drawCard();
+
+        // each player draws one card face up to compare
+        const p1Card = deck1.drawCard();
+        const p3Card = deck3.drawCard();
+
+        if (p1Card > p2Card) {
+          winnerDeck = deck1;
+          winnerDeck.cards.push(card1, card2, card3, war1, war2, war3, war4, war5, war6, p1Card, p3Card);
+        } else {
+          winnerDeck = deck2;
+          winnerDeck.cards.push(card1, card2, card3, war1, war2, war3, war4, war5, war6, p1Card, p3Card);
+        }
+
+
       } else {
         // One player has the highest card, determine winner
         if (card1.value === highestValue) {
           winnerDeck = deck1;
+          winnerDeck.cards.push(card1, card2, card3);
           console.log('Player 1 wins this round!');
+
         } else if (card2.value === highestValue) {
           winnerDeck = deck2;
+          winnerDeck.cards.push(card1, card2, card3);
           console.log('Player 2 wins this round!');
+
         } else {
           winnerDeck = deck3;
-          console.log('Player 3 wins this round!');
-        }
-
-        // Transfer all three cards to the winner's deck
-        if (winnerDeck) {
           winnerDeck.cards.push(card1, card2, card3);
-
-          // Optionally animate the cards back to the winner's deck
-          animateCardToDeck(card1.mesh, winnerDeck);
-          animateCardToDeck(card2.mesh, winnerDeck);
-          animateCardToDeck(card3.mesh, winnerDeck);
-        }
+          console.log('Player 3 wins this round!');
+        }       
       }
     }
   } else {
