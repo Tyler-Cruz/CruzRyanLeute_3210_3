@@ -87,11 +87,11 @@ class Card{
         this.suit = suit;
 
         //card geometry
-        this.geometry = new THREE.BoxGeometry(0.1, 2.5, 3.5);  // Thin rectangle
-        this.material = new THREE.MeshPhongMaterial({ map: texture });
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
-        this.mesh.castShadow = true;
-        this.mesh.position.set(position.x, position.y, position.z);
+        // this.geometry = new THREE.BoxGeometry(0.1, 2.5, 3.5);  // Thin rectangle
+        // this.material = new THREE.MeshPhongMaterial({ map: texture });
+        // this.mesh = new THREE.Mesh(this.geometry, this.material);
+        // this.mesh.castShadow = true;
+        // this.mesh.position.set(position.x, position.y, position.z);
     }
 
     getSuit(){
@@ -103,6 +103,22 @@ class Card{
     }
 }
 
+//card geometry
+function createCard(){
+    //adding cards one for each in the deck
+    for(var i = 0; i < 52; i++){
+      var geometry = new THREE.PlaneGeometry(0.75,1.25,3);
+      var material = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide});
+      //var material = new THREE.TextureLoader().load('PNG-cards-1.3');
+      const card = new THREE.Mesh(geometry, material);
+      card.position.x = 1;
+      card.position.y = 1;
+      card.position.z = 1;
+      scene.add(card);
+    }
+}
+
+createCard();
 // Add lights
 var lights = [];
 lights[0] = new THREE.DirectionalLight(0xFFFFFF, 0.5 );
