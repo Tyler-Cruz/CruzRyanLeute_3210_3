@@ -139,15 +139,7 @@ class Card{
         const faceTexture = new THREE.TextureLoader().load(texturePath);
 
         this.material = new THREE.MeshBasicMaterial({ map: faceTexture, side: THREE.DoubleSide });
-        //card geometry
-        // this.geometry = new THREE.BoxGeometry(0.1, 2.5, 3.5);  // Thin rectangle
-        // this.material = new THREE.MeshPhongMaterial({ map: texture });
-
-        // this.material = new THREE.MeshBasicMaterial({ map: faceTexture});
-
-        // this.mesh = new THREE.Mesh(this.geometry, this.material);
-        // this.mesh.castShadow = true;
-        // this.mesh.position.set(position.x, position.y, position.z);
+        
     }
 
     getSuit(){
@@ -292,32 +284,6 @@ function animateCardToCenter(cardMesh, targetPosition) {
     moveCard(); 
 }
 
-//   // War scenario
-// function initiateWar(playedCards, decks, highCards) {
-//     const warCards = [];
-
-//     highCards.forEach((value, playerIndex) => {
-//         const deck = decks[playerIndex];
-//         if (deck.cards.length >= 4) {
-//             // Draw cards
-//             warCards.push(deck.drawCard(), deck.drawCard(), deck.drawCard());
-//             const warCard = deck.drawCard();
-//             warCards.push(warCard);
-//             console.log(`Player ${playerIndex + 1} draws a card with value ${warCard.value} in the war!`);
-//         } else {
-//             console.log(`Player ${playerIndex + 1} does not have enough cards for a war.`);
-//         }
-//     });
-
-//     const warValues = warCards.map(card => card.value);
-//     const highestWarValue = Math.max(...warValues);
-//     const winningDeckIndex = warValues.indexOf(highestWarValue) % highCards.length;
-
-//     //winning player
-//     const winnerDeck = decks[winningDeckIndex];
-//     winnerDeck.cards.push(...playedCards, ...warCards);
-//     console.log(`Player ${winningDeckIndex + 1} wins the war!`);
-// }
 
 function nextTurn(deck1, deck2, deck3) {
   if (deck1.cards.length > 0 && deck2.cards.length > 0 && deck3.cards.length > 0) {
