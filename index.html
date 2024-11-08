@@ -1,6 +1,21 @@
 <html>
 <head>
     <title>CSC3210 Project 3</title>
+    <style>
+      #ruleText {
+          position: fixed;
+          top: 20px;
+          left: 20px;
+          width: 300px;
+          padding: 15px;
+          background-color: rgba(0, 0, 0, 0.8);
+          color: white;
+          border-radius: 8px;
+          display: none;
+          z-index: 1000; 
+          font-family: Arial, sans-serif;
+      }
+  </style>
 </head>
 <body>
     <canvas id="myCanvas" width="800" height="800"></canvas>
@@ -21,14 +36,11 @@ const ruleMenu = {
     }
 };
 
-gui.add(ruleMenu, 'isOpen').name('Rules').onChange(ruleMenu.toggle.bind(ruleMenu));
+gui.add(ruleMenu, 'toggle').name('Rules');
 
 // Insert custom HTML for the help text
 const ruleText = document.createElement('div');
 ruleText.id = 'ruleText';
-ruleText.style.display = 'none'; // Initially hidden
-ruleText.style.padding = '10px';
-ruleText.style.color = '#fff'; // Text color to match GUI theme
 ruleText.innerHTML = `
     <p>Welcome to three player war!</p>
     <p>Here's how to play:</p>
