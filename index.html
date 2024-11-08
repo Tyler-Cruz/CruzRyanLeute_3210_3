@@ -272,32 +272,32 @@ function animateCardToCenter(cardMesh, targetPosition) {
     moveCard(); 
 }
 
-  // War scenario
-function initiateWar(playedCards, decks, highCards) {
-    const warCards = [];
+//   // War scenario
+// function initiateWar(playedCards, decks, highCards) {
+//     const warCards = [];
 
-    highCards.forEach((value, playerIndex) => {
-        const deck = decks[playerIndex];
-        if (deck.cards.length >= 4) {
-            // Draw cards
-            warCards.push(deck.drawCard(), deck.drawCard(), deck.drawCard());
-            const warCard = deck.drawCard();
-            warCards.push(warCard);
-            console.log(`Player ${playerIndex + 1} draws a card with value ${warCard.value} in the war!`);
-        } else {
-            console.log(`Player ${playerIndex + 1} does not have enough cards for a war.`);
-        }
-    });
+//     highCards.forEach((value, playerIndex) => {
+//         const deck = decks[playerIndex];
+//         if (deck.cards.length >= 4) {
+//             // Draw cards
+//             warCards.push(deck.drawCard(), deck.drawCard(), deck.drawCard());
+//             const warCard = deck.drawCard();
+//             warCards.push(warCard);
+//             console.log(`Player ${playerIndex + 1} draws a card with value ${warCard.value} in the war!`);
+//         } else {
+//             console.log(`Player ${playerIndex + 1} does not have enough cards for a war.`);
+//         }
+//     });
 
-    const warValues = warCards.map(card => card.value);
-    const highestWarValue = Math.max(...warValues);
-    const winningDeckIndex = warValues.indexOf(highestWarValue) % highCards.length;
+//     const warValues = warCards.map(card => card.value);
+//     const highestWarValue = Math.max(...warValues);
+//     const winningDeckIndex = warValues.indexOf(highestWarValue) % highCards.length;
 
-    //winning player
-    const winnerDeck = decks[winningDeckIndex];
-    winnerDeck.cards.push(...playedCards, ...warCards);
-    console.log(`Player ${winningDeckIndex + 1} wins the war!`);
-}
+//     //winning player
+//     const winnerDeck = decks[winningDeckIndex];
+//     winnerDeck.cards.push(...playedCards, ...warCards);
+//     console.log(`Player ${winningDeckIndex + 1} wins the war!`);
+// }
 
 function nextTurn(deck1, deck2, deck3) {
   if (deck1.cards.length > 0 && deck2.cards.length > 0 && deck3.cards.length > 0) {
@@ -314,7 +314,35 @@ function nextTurn(deck1, deck2, deck3) {
          // Compare the cards
     if (card1.value === card2.value && card2.value === card3.value) {
       console.log('Tie! A battle occurs among all players.');
-      // Implement battle logic for three-way tie if desired
+      // each player draws three cards, face down
+        const war1 = deck1.drawCard();
+        const war2 = deck1.drawCard();
+        const war3 = deck1.drawCard();
+
+        const war4 = deck2.drawCard();
+        const war5 = deck2.drawCard();
+        const war6 = deck2.drawCard();
+
+        const war7 = deck3.drawCard();
+        const war8 = deck3.drawCard();
+        const war9 = deck3.drawCard();
+
+        // each player draws one card face up to compare
+        const p1Card = deck1.drawCard();
+        const p2Card = deck2.drawCard();
+        const p3Card = deck3.drawCard();
+
+        if (p1Card > p2Card && p1Card > p3Card) {
+          winnerDeck = deck1;
+          winnerDeck.cards.push(war1, war2, war3, war4, war5, war6, war7, war8, war9, p1Card, p2Card, p3Card);
+        } else if (p2Card > p1Card && p2Card > p3Card) {
+          winnerDeck = deck2;
+          winnerDeck.cards.push(war1, war2, war3, war4, war5, war6, war7, war8, war9, p1Card, p2Card, p3Card);
+        } else {
+          winnerDeck = deck3;
+          winnerDeck.cards.push(war1, war2, war3, war4, war5, war6, war7, war8, war9, p1Card, p2Card, p3Card);
+        }
+
     } else {
       // Determine the highest card and the winner
       const highestValue = Math.max(card1.value, card2.value, card3.value);
