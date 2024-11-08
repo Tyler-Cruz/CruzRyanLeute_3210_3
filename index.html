@@ -7,6 +7,46 @@
 
     <script type="module">
 import * as THREE from "three";
+import * as dat from 'dat.gui';
+
+// above and beyond: help menu with game rules formatted as gui
+const gui = new dat.GUI();
+
+const ruleMenu = {
+    isOpen: false,
+    toggle: function() {
+        this.isOpen = !this.isOpen;
+        
+        document.getElementById('ruleText').style.display = this.isOpen ? 'block' : 'none';
+    }
+};
+
+gui.add(ruleMenu, 'isOpen').name('Rules').onChange(ruleMenu.toggle.bind(ruleMenu));
+
+// Insert custom HTML for the help text
+const ruleText = document.createElement('div');
+ruleText.id = 'ruleText';
+ruleText.style.display = 'none'; // Initially hidden
+ruleText.style.padding = '10px';
+ruleText.style.color = '#fff'; // Text color to match GUI theme
+ruleText.innerHTML = `
+    <p>Welcome to three player war!</p>
+    <p>Here's how to play:</p>
+    <ul>
+        <li>Each player draws one card from their deck and puts it face up in the center of the table</li>
+        <li>Player who plays the card with the highest value wins the round</li>
+        <li>Winning player takes all cards played during the round</li>
+        <li>In the case of a tie, players with cards of equal value will go to war! </li>
+        <li>    *Each player in the war will draw three cards and place them face down</li>
+        <li>    *Each player then draws a fourth card and plays it face up</li>
+        <li>    *Player with highest card value takes ALL cards played during the war</li>
+        <li>The player who ends up with all cards in their deck at the end wins </li>
+        <li>2 is lowest, ace is highest</li>
+    </ul>
+`;
+
+// Append the help text element to the GUI container
+document.body.appendChild(ruleText);
 
 class MyCamera {
   constructor(xLA, yLA, zLA) {
