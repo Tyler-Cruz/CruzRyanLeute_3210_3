@@ -193,8 +193,51 @@ function keyHandler(e) {
   }
 }
 
+function animateCardToCenter(cardMesh, targetPosition) {
+    const speed = 0.05;
+
+    function moveCard() {
+        //Card’s current position toward the target position
+        cardMesh.position.lerp(targetPosition, speed);
+
+        // Check if the card is close enough to stop animation
+        if (cardMesh.position.distanceTo(targetPosition) > 0.01) {
+            requestAnimationFrame(moveCard); 
+        }
+    }
+
+    moveCard(); 
+}
+
+  // War scenario
+function initiateWar(playedCards, decks, highCards) {
+    const warCards = [];
+
+    highCards.forEach((value, playerIndex) => {
+        const deck = decks[playerIndex];
+        if (deck.cards.length >= 4) {
+            // Draw cards
+            warCards.push(deck.drawCard(), deck.drawCard(), deck.drawCard());
+            const warCard = deck.drawCard();
+            warCards.push(warCard);
+            console.log(`Player ${playerIndex + 1} draws a card with value ${warCard.value} in the war!`);
+        } else {
+            console.log(`Player ${playerIndex + 1} does not have enough cards for a war.`);
+        }
+    });
+
+    const warValues = warCards.map(card => card.value);
+    const highestWarValue = Math.max(...warValues);
+    const winningDeckIndex = warValues.indexOf(highestWarValue) % highCards.length;
+
+    //winning player
+    const winnerDeck = decks[winningDeckIndex];
+    winnerDeck.cards.push(...playedCards, ...warCards);
+    console.log(`Player ${winningDeckIndex + 1} wins the war!`);
+}
+
 function nextTurn() {
-  if (deck1.cards.length > 0 && deck2.cards.length > 0) {
+  if (deck1.cards.length > 0 && deck2.cards.length > 0 && deck3.cards.length > 0) {
         const card1 = deck1.drawCard();
         const card2 = deck2.drawCard();
         const card3 = deck3.drawCard();
