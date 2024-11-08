@@ -118,14 +118,19 @@ class Deck{
 
 //creating the card class
 class Card{
-    constructor(texture, value, suit, position){
-        this.texture = texture;
+    constructor(value, suit, position){
         this.value = value;
         this.suit = suit;
+
+        //hopefully loads up the textures of for the cards
+        const faceTexture = new THREE.TextureLoader().load('./PNG-cards-1.3');
 
         //card geometry
         // this.geometry = new THREE.BoxGeometry(0.1, 2.5, 3.5);  // Thin rectangle
         // this.material = new THREE.MeshPhongMaterial({ map: texture });
+
+        // this.material = new THREE.MeshBasicMaterial({ map: faceTexture});
+
         // this.mesh = new THREE.Mesh(this.geometry, this.material);
         // this.mesh.castShadow = true;
         // this.mesh.position.set(position.x, position.y, position.z);
@@ -142,6 +147,20 @@ class Card{
 
 // creating a deck of cards by creating 52 card 
 function appendToDeck(deck, x, y, z){
+
+  //setting the values of the face cards
+  var ace = 14;
+  var jack = 11;
+  var queen = 12;
+  var king = 13;
+
+  this.suits = ["spades", "hearts", "diamonds", "clubs"];
+  this.values = [ace,2,3,4,5,6,7,8,9,10,jack,queen,king];
+  for(var suit of this.suits){
+    for(var value of this.values){
+      this.card.push(new Card(value, suit));
+    }
+  }
     //adding cards one for each in the deck
     const textureLoader = new THREE.TextureLoader();
     for(var i = 0; i < 52; i++){
