@@ -242,7 +242,7 @@ const lightMoveSpeed = 0.5;
 function keyHandler(e) {
   switch(e.keyCode){
     case 78: //key N
-      nextTurn();
+      nextTurn(deck1, deck2, deck3);
       break;
     case 76: //L key toggling ambient light
       lights[1].visible = !lights[1].visible;
