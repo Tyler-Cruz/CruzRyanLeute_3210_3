@@ -135,8 +135,10 @@ class Card{
         this.suit = suit;
 
         //hopefully loads up the textures of for the cards
-        const faceTexture = new THREE.TextureLoader().load('./PNG-cards-1.3');
+        const texturePath = './PNG-cards-1.3/${this.value}_of_${this.suit}.png';
+        const faceTexture = new THREE.TextureLoader().load(texturePath);
 
+        this.material = new THREE.MeshBasicMaterial({ map: faceTexture, side: THREE.DoubleSide });
         //card geometry
         // this.geometry = new THREE.BoxGeometry(0.1, 2.5, 3.5);  // Thin rectangle
         // this.material = new THREE.MeshPhongMaterial({ map: texture });
@@ -165,8 +167,13 @@ try{
   this.cards = [];
   for(let suit of this.suits){
     for(let value of this.values){
-      const newCard = new Card(value, suit);
-      this.cards.push(new Card(value, suit));
+      const newCard = new Card(value, suit, {x,y,z});
+      //this.cards.push(new Card(value, suit));
+      const geometry = new THREE.PlaneGeometry(0.75, 1.25, 3);
+            const card = new THREE.Mesh(geometry, newCard.material); // Use material from Card class
+            card.position.set(x, y, z);
+            deck.addCard(card);
+            scene.add(card);
     }
   }
 } catch (error) {
