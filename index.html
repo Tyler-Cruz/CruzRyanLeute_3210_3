@@ -339,18 +339,35 @@ function nextTurn(deck1, deck2, deck3) {
         const war2 = deck1.drawCard();
         const war3 = deck1.drawCard();
 
+        animateCardToCenter(war1.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(war2.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(war3.mesh, new THREE.Vector3(1, 0, 0));
+
         const war4 = deck2.drawCard();
         const war5 = deck2.drawCard();
         const war6 = deck2.drawCard();
+
+        animateCardToCenter(war4.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(war5.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(war6.mesh, new THREE.Vector3(1, 0, 0));
 
         const war7 = deck3.drawCard();
         const war8 = deck3.drawCard();
         const war9 = deck3.drawCard();
 
+        animateCardToCenter(war7.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(war8.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(war9.mesh, new THREE.Vector3(1, 0, 0));
+
         // each player draws one card face up to compare
         const p1Card = deck1.drawCard();
         const p2Card = deck2.drawCard();
         const p3Card = deck3.drawCard();
+
+        animateCardToCenter(p1Card.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(p2Card.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(p3Card.mesh, new THREE.Vector3(1, 0, 0));
+
 
         if (p1Card > p2Card && p1Card > p3Card) {
           winnerDeck = deck1;
@@ -376,14 +393,26 @@ function nextTurn(deck1, deck2, deck3) {
         const war2 = deck1.drawCard();
         const war3 = deck1.drawCard();
 
+        animateCardToCenter(war1.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(war2.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(war3.mesh, new THREE.Vector3(1, 0, 0));
+        
+
         const war4 = deck2.drawCard();
         const war5 = deck2.drawCard();
         const war6 = deck2.drawCard();
+
+        animateCardToCenter(war4.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(war5.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(war6.mesh, new THREE.Vector3(1, 0, 0));
 
         // each player draws one card face up to compare
         const p1Card = deck1.drawCard();
         const p2Card = deck2.drawCard();
 
+        animateCardToCenter(p1Card.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(p2Card.mesh, new THREE.Vector3(0, 0, 0));
+        
         if (p1Card > p2Card) {
           winnerDeck = deck1;
           winnerDeck.cards.push(war1, war2, war3, war4, war5, war6, p1Card, p2Card);
@@ -399,13 +428,24 @@ function nextTurn(deck1, deck2, deck3) {
           const war2 = deck1.drawCard();
           const war3 = deck1.drawCard();
 
+          animateCardToCenter(war1.mesh, new THREE.Vector3(-1, 0, 0));
+          animateCardToCenter(war2.mesh, new THREE.Vector3(0, 0, 0));
+          animateCardToCenter(war3.mesh, new THREE.Vector3(1, 0, 0));
+
           const war4 = deck2.drawCard();
           const war5 = deck2.drawCard();
           const war6 = deck2.drawCard();
 
+          animateCardToCenter(war4.mesh, new THREE.Vector3(-1, 0, 0));
+          animateCardToCenter(war5.mesh, new THREE.Vector3(0, 0, 0));
+          animateCardToCenter(war6.mesh, new THREE.Vector3(1, 0, 0));
+
           // each player draws one card face up to compare
           const p2Card = deck2.drawCard();
           const p3Card = deck3.drawCard();
+
+          animateCardToCenter(p1Card.mesh, new THREE.Vector3(-1, 0, 0));
+          animateCardToCenter(p2Card.mesh, new THREE.Vector3(0, 0, 0));
 
           if (p2Card > p3Card) {
             winnerDeck = deck1;
@@ -421,14 +461,25 @@ function nextTurn(deck1, deck2, deck3) {
         const war2 = deck1.drawCard();
         const war3 = deck1.drawCard();
 
+        animateCardToCenter(war1.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(war2.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(war3.mesh, new THREE.Vector3(1, 0, 0));
+
         const war4 = deck3.drawCard();
         const war5 = deck3.drawCard();
         const war6 = deck3.drawCard();
+
+        animateCardToCenter(war4.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(war5.mesh, new THREE.Vector3(0, 0, 0));
+        animateCardToCenter(war6.mesh, new THREE.Vector3(1, 0, 0));
 
         // each player draws one card face up to compare
         const p1Card = deck1.drawCard();
         const p3Card = deck3.drawCard();
 
+        animateCardToCenter(p1Card.mesh, new THREE.Vector3(-1, 0, 0));
+        animateCardToCenter(p2Card.mesh, new THREE.Vector3(0, 0, 0));
+    
         if (p1Card > p2Card) {
           winnerDeck = deck1;
           winnerDeck.cards.push(card1, card2, card3, war1, war2, war3, war4, war5, war6, p1Card, p3Card);
