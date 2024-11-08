@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>CSC3210 Practice 8.6/8.8</title>
+    <title>CSC3210 Project 3</title>
 </head>
 <body>
     <canvas id="myCanvas" width="800" height="800"></canvas>
@@ -77,32 +77,33 @@ class Deck{
 
 
 //creating the card class
-// class Card{
-//     constructor(texture, value, suit, position){
-//         this.texture = texture;
-//         this.value = value;
-//         this.suit = suit;
+class Card{
+    constructor(texture, value, suit, position){
+        this.texture = texture;
+        this.value = value;
+        this.suit = suit;
 
-//         //card geometry
-//         // this.geometry = new THREE.BoxGeometry(0.1, 2.5, 3.5);  // Thin rectangle
-//         // this.material = new THREE.MeshPhongMaterial({ map: texture });
-//         // this.mesh = new THREE.Mesh(this.geometry, this.material);
-//         // this.mesh.castShadow = true;
-//         // this.mesh.position.set(position.x, position.y, position.z);
-//     }
+        //card geometry
+        // this.geometry = new THREE.BoxGeometry(0.1, 2.5, 3.5);  // Thin rectangle
+        // this.material = new THREE.MeshPhongMaterial({ map: texture });
+        // this.mesh = new THREE.Mesh(this.geometry, this.material);
+        // this.mesh.castShadow = true;
+        // this.mesh.position.set(position.x, position.y, position.z);
+    }
 
-//     getSuit(){
-//           return this.suit;
-//         }
+    getSuit(){
+          return this.suit;
+        }
 
-//     getValue(){
-//       return this.value;
-//     }
-// }
+    getValue(){
+      return this.value;
+    }
+}
 
 // creating a deck of cards by creating 52 card 
-function createDeck(x, y, z){
+function appendToDeck(deck, x, y, z){
     //adding cards one for each in the deck
+    const textureLoader = new THREE.TextureLoader();
     for(var i = 0; i < 52; i++){
       var geometry = new THREE.PlaneGeometry(0.75,1.25,3);
       var material = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide});
@@ -111,14 +112,17 @@ function createDeck(x, y, z){
       card.position.x = x;
       card.position.y = y;
       card.position.z = z+(i*0.01);
+      deck.addCard(card);
       scene.add(card);
     }
 }
-
+const deck1 = new Deck();
+const deck2 = new Deck();
+const deck3 = new Deck();
 // creating one deck for each player
-createDeck(3,1,1);
-createDeck(0,2,1);
-createDeck(-3,1,1);
+appendToDeck(deck1,3,1,1);
+appendToDeck(deck2,0,2,1);
+appendToDeck(deck3,-3,1,1);
 // Add lights
 var lights = [];
 lights[0] = new THREE.DirectionalLight(0xFFFFFF, 0.5 );
@@ -236,7 +240,7 @@ function initiateWar(playedCards, decks, highCards) {
     console.log(`Player ${winningDeckIndex + 1} wins the war!`);
 }
 
-function nextTurn() {
+function nextTurn(deck1, deck2, deck3) {
   if (deck1.cards.length > 0 && deck2.cards.length > 0 && deck3.cards.length > 0) {
         const card1 = deck1.drawCard();
         const card2 = deck2.drawCard();
